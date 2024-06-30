@@ -2,7 +2,9 @@ package com.gridnine.testing.service.impl;
 
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.model.Segment;
+import com.gridnine.testing.model.params.FilterParam;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -53,18 +55,18 @@ public class FilterServiceImplTest {
     }});
     private final Flight flight3 = new Flight(new ArrayList<Segment>() {{
         add(new Segment(
-                        LocalDateTime.of(2024,06,07,10,30),
-                        LocalDateTime.of(2024, 06, 07, 11, 30)
+                        LocalDateTime.of(2024,07,07,10,30),
+                        LocalDateTime.of(2024, 07, 07, 11, 30)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,06,07,12,00),
-                        LocalDateTime.of(2024, 06, 07, 14, 00)
+                        LocalDateTime.of(2024,07,07,12,00),
+                        LocalDateTime.of(2024, 07, 07, 14, 00)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,06,07,14,45),
-                        LocalDateTime.of(2024, 06, 07, 17, 45)
+                        LocalDateTime.of(2024,07,07,14,45),
+                        LocalDateTime.of(2024, 07, 07, 17, 45)
                 )
         );
     }});
@@ -75,6 +77,45 @@ public class FilterServiceImplTest {
     }};
     @Test
     public void byDepartureTimeTest() {
+        LocalDateTime depTime = LocalDateTime.of(2024,07,02,10,00);
+        List<Flight> expectedResultLessOrEqual = new ArrayList<>() {{
+            add(flight1);
+            add(flight2);
+        }};
+        List<Flight> expectedResultMoreOrEqual = new ArrayList<>() {{
+            add(flight2);
+            add(flight3);
+        }};
+        List<Flight> expectedResultEqual = new ArrayList<>() {{
+            add(flight2);
+        }};
+        List<Flight> actualResultLessOrEqual = filterService.byDepartureTime(flights, FilterParam.LESSOREQUAL, depTime);
+        List<Flight> actualResultMoreOrEqual = filterService.byDepartureTime(flights, FilterParam.MOREOREQUAL, depTime);
+        List<Flight> actualResultEqual = filterService.byDepartureTime(flights, FilterParam.EQUAL, depTime);
+        Assertions.assertEquals(expectedResultLessOrEqual, actualResultLessOrEqual);
+        Assertions.assertEquals(expectedResultMoreOrEqual, actualResultMoreOrEqual);
+        Assertions.assertEquals(expectedResultEqual, actualResultEqual);
 
+    }
+    @Test
+    public void byArrivalTimeTest() {
+        LocalDateTime depTime = LocalDateTime.of(2024, 07, 02, 20, 00);
+        List<Flight> expectedResultLessOrEqual = new ArrayList<>() {{
+            add(flight1);
+            add(flight2);
+        }};
+        List<Flight> expectedResultMoreOrEqual = new ArrayList<>() {{
+            add(flight2);
+            add(flight3);
+        }};
+        List<Flight> expectedResultEqual = new ArrayList<>() {{
+            add(flight2);
+        }};
+        List<Flight> actualResultLessOrEqual = filterService.byArrivalTime(flights, FilterParam.LESSOREQUAL, depTime);
+        List<Flight> actualResultMoreOrEqual = filterService.byArrivalTime(flights, FilterParam.MOREOREQUAL, depTime);
+        List<Flight> actualResultEqual = filterService.byArrivalTime(flights, FilterParam.EQUAL, depTime);
+        Assertions.assertEquals(expectedResultLessOrEqual, actualResultLessOrEqual);
+        Assertions.assertEquals(expectedResultMoreOrEqual, actualResultMoreOrEqual);
+        Assertions.assertEquals(expectedResultEqual, actualResultEqual);
     }
 }
