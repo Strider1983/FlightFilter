@@ -7,5 +7,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface FilterService {
-    List<Flight> byDepartureTime(List<Flight> flights, FilterParam departureDateTime, LocalDateTime departureFilterTime);
+    List<Flight> byDepartureTime(List<Flight> flights, FilterParam filterParam, LocalDateTime departureDateTime);
+    List<Flight> byArrivalTime(List<Flight> flights, FilterParam filterParam, LocalDateTime arrivalDateTime);
+    List<Flight> byTotalFlightTime(List<Flight> flights, FilterParam filterParam, long hours, long minutes);
+    List<Flight> byTotalEarthTime(List<Flight> flights, FilterParam filterParam, long hours, long minutes);
+    List<Flight> byTotalSkyTime(List<Flight> flights, FilterParam filterParam, long hours, long minutes);
+    List<Flight> byTotalSkyTime(List<Flight> flights, FilterParam filterParam, long hours, long minutes);
+
 }

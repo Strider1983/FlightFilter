@@ -20,12 +20,8 @@ public class Main {
 
         List<Flight> filterFlights = filterService.byDepartureTime(flights, FilterParam.LESSOREQUAL, LocalDateTime.now());
         System.out.println(filterFlights);
-
-        LocalDateTime time = LocalDateTime.of(2024,06,30,13,23);
-        LocalDateTime time2 = LocalDateTime.of(2024,06,30,13,22);
-        boolean less = time2.isBefore(time);
-        System.out.println(less);
-
+        List<Flight> filterFlights2 = filterService.byDepartureTime(flights, FilterParam.MOREOREQUAL, LocalDateTime.now());
+        System.out.println(filterFlights2);
 
     }
 }

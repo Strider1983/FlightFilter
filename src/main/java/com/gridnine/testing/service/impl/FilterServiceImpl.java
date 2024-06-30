@@ -13,26 +13,26 @@ public class FilterServiceImpl implements FilterService {
     FlightServiceImpl flightService = new FlightServiceImpl();
 
     @Override
-    public List<Flight> byDepartureTime(List<Flight> flights, FilterParam departureDateTime, LocalDateTime departureFilterTime) {
-        if (departureFilterTime.isBefore(LocalDateTime.now())) {
-            throw new FilterParamExeption("Departure date-time cannot be before present time");
+    public List<Flight> byDepartureTime(List<Flight> flights, FilterParam filterParam, LocalDateTime departureDateTime) {
+        if (departureDateTime.isBefore(LocalDateTime.now())) {
+            throw new FilterParamExeption("Departure date-time cannot be before present date-time");
         }
         List<Flight> filteredByDepartureTime = new ArrayList<>();
-        if (departureDateTime.equals(FilterParam.LESSOREQUAL)) {
+        if (filterParam.equals(FilterParam.LESSOREQUAL)) {
             for (int i = 0; i < flights.size(); i++) {
-                if (flightService.departureTime(flights.get(i)).isBefore(departureFilterTime)) {
+                if (flightService.departureTime(flights.get(i)).isBefore(departureDateTime)) {
                     filteredByDepartureTime.add(flights.get(i));
                 }
             }
-        } else if (departureDateTime.equals(FilterParam.MOREOREQUAL)) {
+        } else if (filterParam.equals(FilterParam.MOREOREQUAL)) {
             for (int i = 0; i < flights.size(); i++) {
-                if (flightService.departureTime(flights.get(i)).isAfter(departureFilterTime)) {
+                if (flightService.departureTime(flights.get(i)).isAfter(departureDateTime)) {
                     filteredByDepartureTime.add(flights.get(i));
                 }
             }
         } else {
             for (int i = 0; i < flights.size(); i++) {
-                if (flightService.departureTime(flights.get(i)).isEqual(departureFilterTime)) {
+                if (flightService.departureTime(flights.get(i)).isEqual(departureDateTime)) {
                     filteredByDepartureTime.add(flights.get(i));
                 }
             }
