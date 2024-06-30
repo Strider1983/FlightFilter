@@ -47,25 +47,6 @@ public class FlightServiceImpl implements FlightService {
         return totalSkyTime;
     }
 
-    @Override
-    public Long maxSegmentMinutes(Flight flight) {
-        long [] segmentMinutes = new long[(int) totalSegments(flight)];
-        for (int i = 0; i < flight.getSegments().size(); i++) {
-            segmentMinutes[i] = Duration.between(flight.getSegments().get(i).getDepartureDate(), flight.getSegments().get(i).getArrivalDate()).toMinutes();
-        }
-        Long maxSegmentMinutes = Arrays.stream(segmentMinutes).max().getAsLong();
-        return maxSegmentMinutes;
-    }
-
-    @Override
-    public Long minSegmentMinutes(Flight flight) {
-        long [] segmentMinutes = new long[(int) totalSegments(flight)];
-        for (int i = 0; i < flight.getSegments().size(); i++) {
-            segmentMinutes[i] = Duration.between(flight.getSegments().get(i).getDepartureDate(), flight.getSegments().get(i).getArrivalDate()).toMinutes();
-        }
-        Long minSegmentMinutes = Arrays.stream(segmentMinutes).min().getAsLong();
-        return minSegmentMinutes;
-    }
 
     @Override
     public LocalDateTime departureTime(Flight flight) {
