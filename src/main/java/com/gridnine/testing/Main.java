@@ -18,8 +18,14 @@ public class Main {
         FlightBuilder flightBuilder = new FlightBuilder();
         List<Flight> flights = flightBuilder.createFlights();
 
-        List<Flight> filterFlights = filterService.byDepartureTime(flights, FilterParam.BEFORE, LocalDateTime.now());
+        List<Flight> filterFlights = filterService.byDepartureTime(flights, FilterParam.LESSOREQUAL, LocalDateTime.now());
         System.out.println(filterFlights);
+
+        LocalDateTime time = LocalDateTime.of(2024,06,30,13,23);
+        LocalDateTime time2 = LocalDateTime.of(2024,06,30,13,22);
+        boolean less = time2.isBefore(time);
+        System.out.println(less);
+
 
     }
 }
