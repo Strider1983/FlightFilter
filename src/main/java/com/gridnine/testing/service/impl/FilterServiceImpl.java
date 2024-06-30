@@ -167,11 +167,57 @@ public class FilterServiceImpl implements FilterService {
 
     @Override
     public List<Flight> byTotalTransfers(List<Flight> flights, FilterParam filterParam, long totalTransfers) {
-        return null;
+        if (totalTransfers < MIN_NUMBER_OF_TRANSFERS) {
+            throw new FilterParamExeption("Number of transfers can't be less than " + MIN_NUMBER_OF_TRANSFERS);
+        }
+        List<Flight> filteredByTotalTransfers = new ArrayList<>();
+        if (filterParam.equals(FilterParam.LESSOREQUAL)) {
+            for (int i = 0; i < flights.size(); i++) {
+                if (flightService.totalTransfers(flights.get(i)) <= totalTransfers) {
+                    filteredByTotalTransfers.add(flights.get(i));
+                }
+            }
+        } else if (filterParam.equals(FilterParam.MOREOREQUAL)) {
+            for (int i = 0; i < flights.size(); i++) {
+                if (flightService.totalTransfers(flights.get(i)) >= totalTransfers) {
+                    filteredByTotalTransfers.add(flights.get(i));
+                }
+            }
+        } else {
+            for (int i = 0; i < flights.size(); i++) {
+                if (flightService.totalTransfers(flights.get(i)) == totalTransfers) {
+                    filteredByTotalTransfers.add(flights.get(i));
+                }
+            }
+        }
+        return filteredByTotalTransfers;
     }
 
     @Override
-    public List<Flight> byTotalSegments(List<Flight> flights, FilterParam filterParam, long totalTransfers) {
-        return null;
+    public List<Flight> byTotalSegments(List<Flight> flights, FilterParam filterParam, long totalSegments) {
+        if (totalSegments < MIN_NUMBER_OF_SEGMENTS) {
+            throw new FilterParamExeption("Number of segments can't be less than " + MIN_NUMBER_OF_SEGMENTS);
+        }
+        List<Flight> filteredByTotalSegments = new ArrayList<>();
+        if (filterParam.equals(FilterParam.LESSOREQUAL)) {
+            for (int i = 0; i < flights.size(); i++) {
+                if (flightService.totalSegments(flights.get(i)) <= totalSegments) {
+                    filteredByTotalSegments.add(flights.get(i));
+                }
+            }
+        } else if (filterParam.equals(FilterParam.MOREOREQUAL)) {
+            for (int i = 0; i < flights.size(); i++) {
+                if (flightService.totalSegments(flights.get(i)) >= totalSegments) {
+                    filteredByTotalSegments.add(flights.get(i));
+                }
+            }
+        } else {
+            for (int i = 0; i < flights.size(); i++) {
+                if (flightService.totalSegments(flights.get(i)) == totalSegments) {
+                    filteredByTotalSegments.add(flights.get(i));
+                }
+            }
+        }
+        return filteredByTotalSegments;
     }
 }
