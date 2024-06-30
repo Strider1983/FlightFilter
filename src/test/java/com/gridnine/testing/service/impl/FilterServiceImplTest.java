@@ -118,4 +118,70 @@ public class FilterServiceImplTest {
         Assertions.assertEquals(expectedResultMoreOrEqual, actualResultMoreOrEqual);
         Assertions.assertEquals(expectedResultEqual, actualResultEqual);
     }
+    @Test
+    public void byTotalFlightTimeTest() {
+        long flightHours = 7;
+        long flightMinutes = 15;
+        List<Flight> expectedResultLessOrEqual = new ArrayList<>() {{
+            add(flight1);
+            add(flight3);
+        }};
+        List<Flight> expectedResultMoreOrEqual = new ArrayList<>() {{
+            add(flight2);
+            add(flight3);
+        }};
+        List<Flight> expectedResultEqual = new ArrayList<>() {{
+            add(flight3);
+        }};
+        List<Flight> actualResultLessOrEqual = filterService.byTotalFlightTime(flights, FilterParam.LESSOREQUAL, flightHours, flightMinutes);
+        List<Flight> actualResultMoreOrEqual = filterService.byTotalFlightTime(flights, FilterParam.MOREOREQUAL, flightHours, flightMinutes);
+        List<Flight> actualResultEqual = filterService.byTotalFlightTime(flights, FilterParam.EQUAL, flightHours, flightMinutes);
+        Assertions.assertEquals(expectedResultLessOrEqual, actualResultLessOrEqual);
+        Assertions.assertEquals(expectedResultMoreOrEqual, actualResultMoreOrEqual);
+        Assertions.assertEquals(expectedResultEqual, actualResultEqual);
+    }
+    @Test
+    public void byTotalEarthTimeTest() {
+        long flightHours = 1;
+        long flightMinutes = 15;
+        List<Flight> expectedResultLessOrEqual = new ArrayList<>() {{
+            add(flight2);
+            add(flight3);
+        }};
+        List<Flight> expectedResultMoreOrEqual = new ArrayList<>() {{
+            add(flight1);
+            add(flight3);
+        }};
+        List<Flight> expectedResultEqual = new ArrayList<>() {{
+            add(flight3);
+        }};
+        List<Flight> actualResultLessOrEqual = filterService.byTotalEarthTime(flights, FilterParam.LESSOREQUAL, flightHours, flightMinutes);
+        List<Flight> actualResultMoreOrEqual = filterService.byTotalEarthTime(flights, FilterParam.MOREOREQUAL, flightHours, flightMinutes);
+        List<Flight> actualResultEqual = filterService.byTotalEarthTime(flights, FilterParam.EQUAL, flightHours, flightMinutes);
+        Assertions.assertEquals(expectedResultLessOrEqual, actualResultLessOrEqual);
+        Assertions.assertEquals(expectedResultMoreOrEqual, actualResultMoreOrEqual);
+        Assertions.assertEquals(expectedResultEqual, actualResultEqual);
+    }
+    @Test
+    public void byTotalSkyTimeTest() {
+        long flightHours = 6;
+        long flightMinutes = 0;
+        List<Flight> expectedResultLessOrEqual = new ArrayList<>() {{
+            add(flight1);
+            add(flight3);
+        }};
+        List<Flight> expectedResultMoreOrEqual = new ArrayList<>() {{
+            add(flight2);
+            add(flight3);
+        }};
+        List<Flight> expectedResultEqual = new ArrayList<>() {{
+            add(flight3);
+        }};
+        List<Flight> actualResultLessOrEqual = filterService.byTotalSkyTime(flights, FilterParam.LESSOREQUAL, flightHours, flightMinutes);
+        List<Flight> actualResultMoreOrEqual = filterService.byTotalSkyTime(flights, FilterParam.MOREOREQUAL, flightHours, flightMinutes);
+        List<Flight> actualResultEqual = filterService.byTotalSkyTime(flights, FilterParam.EQUAL, flightHours, flightMinutes);
+        Assertions.assertEquals(expectedResultLessOrEqual, actualResultLessOrEqual);
+        Assertions.assertEquals(expectedResultMoreOrEqual, actualResultMoreOrEqual);
+        Assertions.assertEquals(expectedResultEqual, actualResultEqual);
+    }
 }
