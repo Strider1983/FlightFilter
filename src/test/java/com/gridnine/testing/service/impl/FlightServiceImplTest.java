@@ -15,40 +15,41 @@ public class FlightServiceImplTest {
     private final List<Segment> segments = new ArrayList<>() {{
         add(new Segment(
                 LocalDateTime.of(2024,06,30,15,00),
-                LocalDateTime.of(2024, 06, 30, 16, 15 )));
+                LocalDateTime.of(2024, 06, 30, 16, 15 ))
+        );
         add(new Segment(
                 LocalDateTime.of(2024,06,30,17,30),
-                LocalDateTime.of(2024, 06, 30, 18, 45 )));
+                LocalDateTime.of(2024, 06, 30, 18, 45 ))
+        );
         add(new Segment(
                 LocalDateTime.of(2024,06,30,19,30),
-                LocalDateTime.of(2024, 06, 30, 21, 10 )));
+                LocalDateTime.of(2024, 06, 30, 21, 10 ))
+        );
     }};
     private final Flight flight = new Flight(segments);
 
-
-
-
-
     @Test
     public void totalFlightMinutesTest () {
-
         long expectedResult = 370;
         long actualResult = flightService.totalFlightMinutes(flight);
         Assertions.assertEquals(expectedResult, actualResult);
     }
     @Test
     public void totalTransfersTest () {
-
         long expectedResult = 2;
         long actualResult = flightService.totalTransfers(flight);
         Assertions.assertEquals(expectedResult, actualResult);
     }
     @Test
     public void totalSegmentsTest() {
-
-
         long expectedResult = 3;
         long actualResult = flightService.totalSegments(flight);
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+    @Test
+    public void totalEarthTimeTest() {
+        long expectedResult = 120;
+        long actualResult = flightService.totalEarthTime(flight);
         Assertions.assertEquals(expectedResult, actualResult);
     }
 }
