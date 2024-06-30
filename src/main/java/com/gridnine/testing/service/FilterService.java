@@ -13,6 +13,6 @@ public interface FilterService {
     List<Flight> byTotalEarthTime(List<Flight> flights, FilterParam filterParam, long hours, long minutes);
     List<Flight> byTotalSkyTime(List<Flight> flights, FilterParam filterParam, long hours, long minutes);
     List<Flight> byTotalTransfers(List<Flight> flights, FilterParam filterParam, long totalTransfers);
-    List<Flight> byTotalSegments(List<Flight> flights, FilterParam filterParam, long totalSegments)
+    List<Flight> byTotalSegments(List<Flight> flights, FilterParam filterParam, long totalSegments);
 
 }
