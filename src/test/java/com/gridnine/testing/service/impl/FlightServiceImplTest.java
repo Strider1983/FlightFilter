@@ -58,4 +58,16 @@ public class FlightServiceImplTest {
         long actualResult = flightService.totalSkyTime(flight);
         Assertions.assertEquals(expectedResult, actualResult);
     }
+    @Test
+    public void departureTimeTest() {
+        LocalDateTime expectedResult = LocalDateTime.of(2024,06,30,15,00);
+        LocalDateTime actualResult = flightService.departureTime(flight);
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+    @Test
+    public void arrivalTimeTest() {
+        LocalDateTime expectedResult = LocalDateTime.of(2024, 06, 30, 21, 10 );
+        LocalDateTime actualResult = flightService.arrivalTime(flight);
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
 }
