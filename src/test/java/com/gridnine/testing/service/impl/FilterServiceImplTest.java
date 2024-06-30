@@ -218,5 +218,4 @@ public class FilterServiceImplTest {
         Assertions.assertEquals(expectedResultMoreOrEqual, actualResultMoreOrEqual);
         Assertions.assertEquals(expectedResultEqual, actualResultEqual);
     }
-
 }
