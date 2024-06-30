@@ -184,4 +184,39 @@ public class FilterServiceImplTest {
         Assertions.assertEquals(expectedResultMoreOrEqual, actualResultMoreOrEqual);
         Assertions.assertEquals(expectedResultEqual, actualResultEqual);
     }
+    @Test
+    public void byTotalTransfersTest() {
+        long totalTransfers = 1;
+        List<Flight> expectedResultLessOrEqual = new ArrayList<>();
+        List<Flight> expectedResultMoreOrEqual = new ArrayList<>() {{
+            add(flight1);
+            add(flight2);
+            add(flight3);
+        }};
+        List<Flight> expectedResultEqual = new ArrayList<>();
+        List<Flight> actualResultLessOrEqual = filterService.byTotalTransfers(flights, FilterParam.LESSOREQUAL, totalTransfers);
+        List<Flight> actualResultMoreOrEqual = filterService.byTotalTransfers(flights, FilterParam.MOREOREQUAL, totalTransfers);
+        List<Flight> actualResultEqual = filterService.byTotalTransfers(flights, FilterParam.EQUAL, totalTransfers);
+        Assertions.assertEquals(expectedResultLessOrEqual, actualResultLessOrEqual);
+        Assertions.assertEquals(expectedResultMoreOrEqual, actualResultMoreOrEqual);
+        Assertions.assertEquals(expectedResultEqual, actualResultEqual);
+    }
+    @Test
+    public void byTotalSegments() {
+        long totalSegments = 2;
+        List<Flight> expectedResultLessOrEqual = new ArrayList<>();
+        List<Flight> expectedResultMoreOrEqual = new ArrayList<>() {{
+            add(flight1);
+            add(flight2);
+            add(flight3);
+        }};
+        List<Flight> expectedResultEqual = new ArrayList<>();
+        List<Flight> actualResultLessOrEqual = filterService.byTotalSegments(flights, FilterParam.LESSOREQUAL, totalSegments);
+        List<Flight> actualResultMoreOrEqual = filterService.byTotalSegments(flights, FilterParam.MOREOREQUAL, totalSegments);
+        List<Flight> actualResultEqual = filterService.byTotalSegments(flights, FilterParam.EQUAL, totalSegments);
+        Assertions.assertEquals(expectedResultLessOrEqual, actualResultLessOrEqual);
+        Assertions.assertEquals(expectedResultMoreOrEqual, actualResultMoreOrEqual);
+        Assertions.assertEquals(expectedResultEqual, actualResultEqual);
+    }
+
 }
