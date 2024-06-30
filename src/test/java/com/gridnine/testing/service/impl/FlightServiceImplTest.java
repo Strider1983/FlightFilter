@@ -52,4 +52,10 @@ public class FlightServiceImplTest {
         long actualResult = flightService.totalEarthTime(flight);
         Assertions.assertEquals(expectedResult, actualResult);
     }
+    @Test
+    public void totalSkyTimeTest() {
+        long expectedResult = 250;
+        long actualResult = flightService.totalSkyTime(flight);
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
 }
