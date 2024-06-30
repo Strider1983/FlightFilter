@@ -19,9 +19,10 @@ public class Main {
         List<Flight> flights = flightBuilder.createFlights();
 
         List<Flight> filterFlights = filterService.byDepartureTime(flights, FilterParam.LESSOREQUAL, LocalDateTime.now());
-        System.out.println(filterFlights);
-        List<Flight> filterFlights2 = filterService.byDepartureTime(flights, FilterParam.MOREOREQUAL, LocalDateTime.now());
-        System.out.println(filterFlights2);
+
+        List<Flight> filterFlights2 = filterService.byArrivalTime(flights, FilterParam.MOREOREQUAL, LocalDateTime.now().plusHours(3));
+
+
 
     }
 }

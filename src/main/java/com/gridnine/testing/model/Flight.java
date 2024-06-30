@@ -17,6 +17,6 @@ public class Flight {
     @Override
     public String toString() {
         return segments.stream().map(Object::toString)
-                .collect(Collectors.joining("-Flight-"));
+                .collect(Collectors.joining(""));
     }
 }

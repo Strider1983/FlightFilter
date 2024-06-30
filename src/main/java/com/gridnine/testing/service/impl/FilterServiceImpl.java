@@ -13,6 +13,11 @@ public class FilterServiceImpl implements FilterService {
     FlightServiceImpl flightService = new FlightServiceImpl();
     private final LocalDateTime EARLIEST_DEPARTURE_TIME = LocalDateTime.now();
     private final LocalDateTime EARLIEST_ARRIVAL_TIME = LocalDateTime.now().plusHours(2);
+    private final long MIN_TOTAL_FLIGHT_MINUTES = 120;
+    private final long MIN_TOTAL_EARTH_MINUTES = 0;
+    private final long MIN_TOTAL_SKY_MINUTES = 120;
+    private final long MIN_NUMBER_OF_TRANSFERS = 0;
+    private final long MIN_NUMBER_OF_SEGMENTS = 1;
 
     @Override
     public List<Flight> byDepartureTime(List<Flight> flights, FilterParam filterParam, LocalDateTime departureDateTime) {
@@ -75,17 +80,89 @@ public class FilterServiceImpl implements FilterService {
 
     @Override
     public List<Flight> byTotalFlightTime(List<Flight> flights, FilterParam filterParam, long hours, long minutes) {
-        return null;
+        long totalFlightMinutes = hours * 60 + minutes;
+        if (totalFlightMinutes < MIN_TOTAL_FLIGHT_MINUTES) {
+            throw new FilterParamExeption("Total flight time can't be less than" + MIN_TOTAL_FLIGHT_MINUTES/60 + " hours");
+        }
+        List<Flight> filteredByTotalTime = new ArrayList<>();
+        if (filterParam.equals(FilterParam.LESSOREQUAL)) {
+            for (int i = 0; i < flights.size(); i++) {
+                if (flightService.totalFlightMinutes(flights.get(i)) <= totalFlightMinutes) {
+                    filteredByTotalTime.add(flights.get(i));
+                }
+            }
+        } else if (filterParam.equals(FilterParam.MOREOREQUAL)) {
+            for (int i = 0; i < flights.size(); i++) {
+                if (flightService.totalFlightMinutes(flights.get(i)) >= totalFlightMinutes){
+                    filteredByTotalTime.add(flights.get(i));
+                }
+            }
+        } else {
+            for (int i = 0; i < flights.size(); i++) {
+                if (flightService.totalFlightMinutes(flights.get(i)) == totalFlightMinutes){
+                    filteredByTotalTime.add(flights.get(i));
+                }
+            }
+        }
+        return filteredByTotalTime;
     }
 
     @Override
     public List<Flight> byTotalEarthTime(List<Flight> flights, FilterParam filterParam, long hours, long minutes) {
-        return null;
+        long totalEarthMinutes = hours * 60 + minutes;
+        if (totalEarthMinutes < MIN_TOTAL_EARTH_MINUTES) {
+            throw new FilterParamExeption("Total time on earth can't be less than" + MIN_TOTAL_EARTH_MINUTES/60 + "hours");
+        }
+        List<Flight> filteredByTotalEarthTime = new ArrayList<>();
+        if (filterParam.equals(FilterParam.LESSOREQUAL)) {
+            for (int i = 0; i < flights.size(); i++) {
+                if (flightService.totalEarthTime(flights.get(i)) <= totalEarthMinutes) {
+                    filteredByTotalEarthTime.add(flights.get(i));
+                }
+            }
+        } else if (filterParam.equals(FilterParam.MOREOREQUAL)) {
+            for (int i = 0; i < flights.size(); i++) {
+                if (flightService.totalEarthTime(flights.get(i)) >= totalEarthMinutes){
+                    filteredByTotalEarthTime.add(flights.get(i));
+                }
+            }
+        } else {
+            for (int i = 0; i < flights.size(); i++) {
+                if (flightService.totalEarthTime(flights.get(i)) == totalEarthMinutes){
+                    filteredByTotalEarthTime.add(flights.get(i));
+                }
+            }
+        }
+        return filteredByTotalEarthTime;
     }
 
     @Override
     public List<Flight> byTotalSkyTime(List<Flight> flights, FilterParam filterParam, long hours, long minutes) {
-        return null;
+        long totalSkyMinutes = hours * 60 + minutes;
+        if (totalSkyMinutes < MIN_TOTAL_SKY_MINUTES) {
+            throw new FilterParamExeption("Total time in the sky can't be less than" + MIN_TOTAL_SKY_MINUTES/60 + "hours");
+        }
+        List<Flight> filteredByTotalSkyTime = new ArrayList<>();
+        if (filterParam.equals(FilterParam.LESSOREQUAL)) {
+            for (int i = 0; i < flights.size(); i++) {
+                if (flightService.totalSkyTime(flights.get(i)) <= totalSkyMinutes) {
+                    filteredByTotalSkyTime.add(flights.get(i));
+                }
+            }
+        } else if (filterParam.equals(FilterParam.MOREOREQUAL)) {
+            for (int i = 0; i < flights.size(); i++) {
+                if (flightService.totalSkyTime(flights.get(i)) >= totalSkyMinutes){
+                    filteredByTotalSkyTime.add(flights.get(i));
+                }
+            }
+        } else {
+            for (int i = 0; i < flights.size(); i++) {
+                if (flightService.totalSkyTime(flights.get(i)) == totalSkyMinutes){
+                    filteredByTotalSkyTime.add(flights.get(i));
+                }
+            }
+        }
+        return filteredByTotalSkyTime;
     }
 
     @Override
