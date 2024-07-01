@@ -3,6 +3,7 @@ package com.gridnine.testing.service;
 import com.gridnine.testing.model.Flight;
 import com.gridnine.testing.model.params.FilterParam;
 
+import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.List;
 
