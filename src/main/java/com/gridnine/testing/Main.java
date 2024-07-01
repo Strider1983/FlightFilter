@@ -8,6 +8,7 @@ import com.gridnine.testing.service.impl.FlightBuilderFilterServiceImpl;
 import com.gridnine.testing.service.impl.FlightServiceImpl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -19,11 +20,6 @@ public class Main {
 
         FlightBuilder flightBuilder = new FlightBuilder();
         List<Flight> flights = flightBuilder.createFlights();
-
-        List<Flight> flights2 = flightBuilderFilterService.allRulesFilter(flights);
-        for (int i = 0; i < flights2.size(); i++) {
-            System.out.println(flights2.get(i));
-        }
 
 
 

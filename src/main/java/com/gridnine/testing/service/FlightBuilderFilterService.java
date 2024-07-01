@@ -8,6 +8,6 @@ public interface FlightBuilderFilterService {
     List<Flight> excludeByDepartureTime (List<Flight> flights);
     List<Flight> excludeByIncorrectSegmentDates (List<Flight> flights);
     List<Flight> excludeByEarthTotalTime (List<Flight> flights);
-    List<Flight> allRulesFilter (List<Flight> flights);
+    List<Flight> allRulesBuilderFilter(List<Flight> flights);
 
 }

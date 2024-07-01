@@ -43,7 +43,7 @@ public class FlightBuilderFilterServiceImpl implements FlightBuilderFilterServic
     }
 
     @Override
-    public List<Flight> allRulesFilter(List<Flight> flights) {
+    public List<Flight> allRulesBuilderFilter(List<Flight> flights) {
         List<Flight> filteredByRules = flights;
         List<Flight> filteredByRules1 = excludeByDepartureTime(filteredByRules);
         List<Flight> filteredByRules2 = excludeByIncorrectSegmentDates(filteredByRules1);
