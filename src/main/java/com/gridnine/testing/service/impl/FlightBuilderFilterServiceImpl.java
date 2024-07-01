@@ -6,6 +6,7 @@ import com.gridnine.testing.service.FlightBuilderFilterService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -23,15 +24,16 @@ public class FlightBuilderFilterServiceImpl implements FlightBuilderFilterServic
     public List<Flight> excludeByIncorrectSegmentDates(List<Flight> flights) {
         List<Flight> filtered = new ArrayList<>();
         for (int i = 0; i < flights.size(); i++) {
+            int temp = 0;
             for (int j = 0; j < flights.get(i).getSegments().size(); j++) {
-                if (flights.get(i).getSegments().get(j).getArrivalDate().isAfter(flights.get(i).getSegments().get(j).getDepartureDate())) {
-                    filtered.add(flights.get(i));
-
-                    }
-
+                if (flights.get(i).getSegments().get(j).getArrivalDate().isBefore(flights.get(i).getSegments().get(j).getDepartureDate())) {
+                    temp++;
                 }
-
             }
+            if (temp == 0) {
+                filtered.add(flights.get(i));
+            }
+        }
         return filtered;
     }
 

@@ -20,7 +20,7 @@ public class Main {
         FlightBuilder flightBuilder = new FlightBuilder();
         List<Flight> flights = flightBuilder.createFlights();
 
-        List<Flight> flights2 = flightBuilderFilterService.excludeByIncorrectSegmentDates(flights);
+        List<Flight> flights2 = flightBuilderFilterService.allRulesFilter(flights);
         for (int i = 0; i < flights2.size(); i++) {
             System.out.println(flights2.get(i));
         }
