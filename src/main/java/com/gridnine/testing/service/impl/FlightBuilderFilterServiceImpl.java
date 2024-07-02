@@ -15,10 +15,22 @@ public class FlightBuilderFilterServiceImpl implements FlightBuilderFilterServic
     private final long MAX_EARTH_HOURS = 2;
     private final long MAX_EARTH_MIUTES = 0;
     private final FilterServiceImpl filterService = new FilterServiceImpl();
+
+    /**
+     * excludes flights from list witch departure before present date-time
+     * @param flights
+     * @return List<Flight>
+     */
     @Override
     public List<Flight> excludeByDepartureTime(List<Flight> flights) {
         return filterService.byDepartureTime(flights, FilterParam.MOREOREQUAL, DEPARTURE_DATE_TIME);
     }
+
+    /**
+     * excludes flights including segments witch departure before arrival
+     * @param flights
+     * @return List<Flight>
+     */
 
     @Override
     public List<Flight> excludeByIncorrectSegmentDates(List<Flight> flights) {
@@ -36,6 +48,12 @@ public class FlightBuilderFilterServiceImpl implements FlightBuilderFilterServic
         }
         return filtered;
     }
+
+    /**
+     * excludes flights with stay on earth more than specified time
+     * @param flights
+     * @return List<Flight>
+     */
 
     @Override
     public List<Flight> excludeByEarthTotalTime(List<Flight> flights) {

@@ -19,6 +19,14 @@ public class FilterServiceImpl implements FilterService {
     private final long MIN_NUMBER_OF_TRANSFERS = 0;
     private final long MIN_NUMBER_OF_SEGMENTS = 1;
 
+    /**
+     * Filters flights by departure DateTime before, after or equal to specified date-time
+     * @param flights
+     * @param filterParam
+     * @param departureDateTime
+     * @return List<Flight>
+     */
+
     @Override
     public List<Flight> byDepartureTime(List<Flight> flights, FilterParam filterParam, LocalDateTime departureDateTime) {
         if (departureDateTime.isBefore(EARLIEST_DEPARTURE_TIME)) {
@@ -47,6 +55,14 @@ public class FilterServiceImpl implements FilterService {
 
         return filteredByDepartureTime;
     }
+
+    /**
+     * Filters flights by arrival Date-Time before, after or equal to specified date-time
+     * @param flights
+     * @param filterParam
+     * @param arrivalDateTime
+     * @return List<Flight>
+     */
 
     @Override
     public List<Flight> byArrivalTime(List<Flight> flights, FilterParam filterParam, LocalDateTime arrivalDateTime) {
@@ -78,6 +94,15 @@ public class FilterServiceImpl implements FilterService {
         return filteredByArrivalTime;
     }
 
+    /**
+     * Filters flights by  total time from departure to arrival before, after or equal to specified time
+     * @param flights
+     * @param filterParam
+     * @param hours
+     * @param minutes
+     * @return List<Flight>
+     */
+
     @Override
     public List<Flight> byTotalFlightTime(List<Flight> flights, FilterParam filterParam, long hours, long minutes) {
         long totalFlightMinutes = hours * 60 + minutes;
@@ -106,6 +131,15 @@ public class FilterServiceImpl implements FilterService {
         }
         return filteredByTotalTime;
     }
+
+    /**
+     * Filters flights by total time on earth between segments before, after or equal to specified time
+     * @param flights
+     * @param filterParam
+     * @param hours
+     * @param minutes
+     * @return List<Flight>
+     */
 
     @Override
     public List<Flight> byTotalEarthTime(List<Flight> flights, FilterParam filterParam, long hours, long minutes) {
@@ -136,6 +170,15 @@ public class FilterServiceImpl implements FilterService {
         return filteredByTotalEarthTime;
     }
 
+    /**
+     * Filters flights by total time in the sky of all flight before, after or equal to specified time
+     * @param flights
+     * @param filterParam
+     * @param hours
+     * @param minutes
+     * @return List<Flight>
+     */
+
     @Override
     public List<Flight> byTotalSkyTime(List<Flight> flights, FilterParam filterParam, long hours, long minutes) {
         long totalSkyMinutes = hours * 60 + minutes;
@@ -165,6 +208,14 @@ public class FilterServiceImpl implements FilterService {
         return filteredByTotalSkyTime;
     }
 
+    /**
+     * Filters flights by total time number of transfers between flight segments before, after or equal to specified value
+     * @param flights
+     * @param filterParam
+     * @param totalTransfers
+     * @return List<Flight>
+     */
+
     @Override
     public List<Flight> byTotalTransfers(List<Flight> flights, FilterParam filterParam, long totalTransfers) {
         if (totalTransfers < MIN_NUMBER_OF_TRANSFERS) {
@@ -192,6 +243,14 @@ public class FilterServiceImpl implements FilterService {
         }
         return filteredByTotalTransfers;
     }
+
+    /**
+     * Filters flights by total time number of flight segments before, after or equal to specified value
+     * @param flights
+     * @param filterParam
+     * @param totalSegments
+     * @return List<Flight>
+     */
 
     @Override
     public List<Flight> byTotalSegments(List<Flight> flights, FilterParam filterParam, long totalSegments) {
