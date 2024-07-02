@@ -21,53 +21,53 @@ public class FlightBuilderFilterServiceImplTest {
 
     private final Flight flight1 = new Flight(new ArrayList<Segment>() {{
         add(new Segment(
-                        LocalDateTime.of(2024,8,30,15,00),
-                        LocalDateTime.of(2024, 8, 30, 16, 15)
+                        LocalDateTime.now().plusDays(2).plusHours(6),
+                        LocalDateTime.now().plusDays(2).plusHours(8).plusMinutes(25)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,8,30,17,15),
-                        LocalDateTime.of(2024, 8, 30, 18, 45)
+                        LocalDateTime.now().plusDays(2).plusHours(9),
+                        LocalDateTime.now().plusDays(2).plusHours(12)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,8,30,19,30),
-                        LocalDateTime.of(2024, 8, 30, 21, 10)
+                        LocalDateTime.now().plusDays(2).plusHours(13),
+                        LocalDateTime.now().plusDays(2).plusHours(15)
                 )
         );
     }});
     private final Flight flight2 = new Flight(new ArrayList<Segment>() {{
         add(new Segment(
-                        LocalDateTime.of(2024,7,02,10,00),
-                        LocalDateTime.of(2024, 7, 02, 13, 30)
+                        LocalDateTime.now().plusDays(3).plusHours(1),
+                        LocalDateTime.now().plusDays(3).plusHours(4)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,7,02,14,00),
-                        LocalDateTime.of(2024, 7, 02, 17, 00)
+                        LocalDateTime.now().plusDays(3).plusHours(5),
+                        LocalDateTime.now().plusDays(3).plusHours(7).plusMinutes(10)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,7,02,17,30),
-                        LocalDateTime.of(2024, 7, 02, 20, 00)
+                        LocalDateTime.now().plusDays(3).plusHours(8),
+                        LocalDateTime.now().plusDays(3).plusHours(13)
                 )
         );
     }});
     //A flight departing in the past
     private final Flight flight3 = new Flight(new ArrayList<Segment>() {{
         add(new Segment(
-                        LocalDateTime.of(2024,6,07,10,30),
-                        LocalDateTime.of(2024, 6, 07, 11, 30)
+                        LocalDateTime.now().minusDays(1).plusHours(1),
+                        LocalDateTime.now().minusDays(1).plusHours(3)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,6,07,12,00),
-                        LocalDateTime.of(2024, 6, 07, 14, 00)
+                        LocalDateTime.now().minusDays(1).plusHours(4),
+                        LocalDateTime.now().minusDays(1).plusHours(8).plusMinutes(35)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,6,07,14,45),
-                        LocalDateTime.of(2024, 6, 07, 17, 45)
+                        LocalDateTime.now().minusDays(1).plusHours(9),
+                        LocalDateTime.now().minusDays(1).plusHours(11)
                 )
         );
     }});
@@ -75,36 +75,36 @@ public class FlightBuilderFilterServiceImplTest {
     //A flight that departs before it arrives
     private final Flight flight4 = new Flight(new ArrayList<Segment>() {{
         add(new Segment(
-                        LocalDateTime.of(2024,7,7,10,30),
-                        LocalDateTime.of(2024, 7, 7, 11, 30)
+                        LocalDateTime.now().plusDays(8).plusHours(3),
+                        LocalDateTime.now().plusDays(8).plusHours(6)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,7,7,12,00),
-                        LocalDateTime.of(2024, 7, 7, 11, 30)
+                        LocalDateTime.now().plusDays(8).plusHours(7),
+                        LocalDateTime.now().plusDays(8).plusHours(6)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,7,7,11,45),
-                        LocalDateTime.of(2024, 7, 7, 13, 45)
+                        LocalDateTime.now().plusDays(8).plusHours(6),
+                        LocalDateTime.now().plusDays(8).plusHours(11)
                 )
         );
     }});
     //A flight with more than two hours ground time
     private final Flight flight5 = new Flight(new ArrayList<Segment>() {{
         add(new Segment(
-                        LocalDateTime.of(2024,9,07,10,30),
-                        LocalDateTime.of(2024, 9, 07, 11, 30)
+                        LocalDateTime.now().plusDays(12).plusHours(1),
+                        LocalDateTime.now().plusDays(12).plusHours(4)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,9,07,13,00),
-                        LocalDateTime.of(2024, 9, 07, 14, 00)
+                        LocalDateTime.now().plusDays(12).plusHours(5),
+                        LocalDateTime.now().plusDays(12).plusHours(8)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,9,07,16,45),
-                        LocalDateTime.of(2024, 9, 07, 18, 45)
+                        LocalDateTime.now().plusDays(12).plusHours(9).plusMinutes(10),
+                        LocalDateTime.now().plusDays(12).plusHours(12)
                 )
         );
     }});

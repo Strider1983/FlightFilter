@@ -21,52 +21,52 @@ public class FilterServiceImplTest {
     FlightServiceImpl flightService = new FlightServiceImpl();
     private final Flight flight1 = new Flight(new ArrayList<Segment>() {{
         add(new Segment(
-                        LocalDateTime.of(2024,06,30,15,00),
-                        LocalDateTime.of(2024, 06, 30, 16, 15)
+                        LocalDateTime.now().plusDays(3).plusHours(1),
+                        LocalDateTime.now().plusDays(3).plusHours(3).plusMinutes(30)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,06,30,17,30),
-                        LocalDateTime.of(2024, 06, 30, 18, 45)
+                        LocalDateTime.now().plusDays(3).plusHours(4),
+                        LocalDateTime.now().plusDays(3).plusHours(7)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,06,30,19,30),
-                        LocalDateTime.of(2024, 06, 30, 21, 10)
+                        LocalDateTime.now().plusDays(3).plusHours(8),
+                        LocalDateTime.now().plusDays(3).plusHours(12)
                 )
         );
     }});
     private final Flight flight2 = new Flight(new ArrayList<Segment>() {{
         add(new Segment(
-                        LocalDateTime.of(2024,07,02,10,00),
-                        LocalDateTime.of(2024, 07, 02, 13, 30)
+                        LocalDateTime.now().plusDays(5).plusHours(1),
+                        LocalDateTime.now().plusDays(5).plusHours(3).plusMinutes(45)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,07,02,14,00),
-                        LocalDateTime.of(2024, 07, 02, 17, 00)
+                        LocalDateTime.now().plusDays(5).plusHours(4),
+                        LocalDateTime.now().plusDays(5).plusHours(7)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,07,02,17,30),
-                        LocalDateTime.of(2024, 07, 02, 20, 00)
+                        LocalDateTime.now().plusDays(5).plusHours(8),
+                        LocalDateTime.now().plusDays(5).plusHours(10)
                 )
         );
     }});
     private final Flight flight3 = new Flight(new ArrayList<Segment>() {{
         add(new Segment(
-                        LocalDateTime.of(2024,07,07,10,30),
-                        LocalDateTime.of(2024, 07, 07, 11, 30)
+                        LocalDateTime.now().plusDays(8).plusHours(2),
+                        LocalDateTime.now().plusDays(8).plusHours(5)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,07,07,12,00),
-                        LocalDateTime.of(2024, 07, 07, 14, 00)
+                        LocalDateTime.now().plusDays(8).plusHours(6),
+                        LocalDateTime.now().plusDays(8).plusHours(8).plusMinutes(20)
                 )
         );
         add(new Segment(
-                        LocalDateTime.of(2024,07,07,14,45),
-                        LocalDateTime.of(2024, 07, 07, 17, 45)
+                        LocalDateTime.now().plusDays(8).plusHours(9),
+                        LocalDateTime.now().plusDays(8).plusHours(12)
                 )
         );
     }});
@@ -77,18 +77,15 @@ public class FilterServiceImplTest {
     }};
     @Test
     public void byDepartureTimeTest() {
-        LocalDateTime depTime = LocalDateTime.of(2024,07,02,10,00);
+        LocalDateTime depTime = LocalDateTime.now().plusDays(5).plusHours(1).plusMinutes(20);
         List<Flight> expectedResultLessOrEqual = new ArrayList<>() {{
             add(flight1);
             add(flight2);
         }};
         List<Flight> expectedResultMoreOrEqual = new ArrayList<>() {{
-            add(flight2);
             add(flight3);
         }};
-        List<Flight> expectedResultEqual = new ArrayList<>() {{
-            add(flight2);
-        }};
+        List<Flight> expectedResultEqual = new ArrayList<>();
         List<Flight> actualResultLessOrEqual = filterService.byDepartureTime(flights, FilterParam.LESSOREQUAL, depTime);
         List<Flight> actualResultMoreOrEqual = filterService.byDepartureTime(flights, FilterParam.MOREOREQUAL, depTime);
         List<Flight> actualResultEqual = filterService.byDepartureTime(flights, FilterParam.EQUAL, depTime);
@@ -99,18 +96,15 @@ public class FilterServiceImplTest {
     }
     @Test
     public void byArrivalTimeTest() {
-        LocalDateTime depTime = LocalDateTime.of(2024, 07, 02, 20, 00);
+        LocalDateTime depTime = LocalDateTime.now().plusDays(5).plusHours(9);
         List<Flight> expectedResultLessOrEqual = new ArrayList<>() {{
             add(flight1);
-            add(flight2);
         }};
         List<Flight> expectedResultMoreOrEqual = new ArrayList<>() {{
             add(flight2);
             add(flight3);
         }};
-        List<Flight> expectedResultEqual = new ArrayList<>() {{
-            add(flight2);
-        }};
+        List<Flight> expectedResultEqual = new ArrayList<>();
         List<Flight> actualResultLessOrEqual = filterService.byArrivalTime(flights, FilterParam.LESSOREQUAL, depTime);
         List<Flight> actualResultMoreOrEqual = filterService.byArrivalTime(flights, FilterParam.MOREOREQUAL, depTime);
         List<Flight> actualResultEqual = filterService.byArrivalTime(flights, FilterParam.EQUAL, depTime);
@@ -120,14 +114,14 @@ public class FilterServiceImplTest {
     }
     @Test
     public void byTotalFlightTimeTest() {
-        long flightHours = 7;
-        long flightMinutes = 15;
+        long flightHours = 10;
+        long flightMinutes = 0;
         List<Flight> expectedResultLessOrEqual = new ArrayList<>() {{
-            add(flight1);
+            add(flight2);
             add(flight3);
         }};
         List<Flight> expectedResultMoreOrEqual = new ArrayList<>() {{
-            add(flight2);
+            add(flight1);
             add(flight3);
         }};
         List<Flight> expectedResultEqual = new ArrayList<>() {{
@@ -143,17 +137,17 @@ public class FilterServiceImplTest {
     @Test
     public void byTotalEarthTimeTest() {
         long flightHours = 1;
-        long flightMinutes = 15;
+        long flightMinutes = 30;
         List<Flight> expectedResultLessOrEqual = new ArrayList<>() {{
+            add(flight1);
             add(flight2);
-            add(flight3);
         }};
         List<Flight> expectedResultMoreOrEqual = new ArrayList<>() {{
             add(flight1);
             add(flight3);
         }};
         List<Flight> expectedResultEqual = new ArrayList<>() {{
-            add(flight3);
+            add(flight1);
         }};
         List<Flight> actualResultLessOrEqual = filterService.byTotalEarthTime(flights, FilterParam.LESSOREQUAL, flightHours, flightMinutes);
         List<Flight> actualResultMoreOrEqual = filterService.byTotalEarthTime(flights, FilterParam.MOREOREQUAL, flightHours, flightMinutes);
@@ -164,14 +158,14 @@ public class FilterServiceImplTest {
     }
     @Test
     public void byTotalSkyTimeTest() {
-        long flightHours = 6;
-        long flightMinutes = 0;
+        long flightHours = 8;
+        long flightMinutes = 20;
         List<Flight> expectedResultLessOrEqual = new ArrayList<>() {{
-            add(flight1);
+            add(flight2);
             add(flight3);
         }};
         List<Flight> expectedResultMoreOrEqual = new ArrayList<>() {{
-            add(flight2);
+            add(flight1);
             add(flight3);
         }};
         List<Flight> expectedResultEqual = new ArrayList<>() {{

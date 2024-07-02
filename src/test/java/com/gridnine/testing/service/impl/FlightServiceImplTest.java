@@ -5,6 +5,7 @@ import com.gridnine.testing.model.Segment;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
@@ -14,23 +15,23 @@ public class FlightServiceImplTest {
 
     private final List<Segment> segments = new ArrayList<>() {{
         add(new Segment(
-                LocalDateTime.of(2024,06,30,15,00),
-                LocalDateTime.of(2024, 06, 30, 16, 15 ))
-        );
+                LocalDateTime.now().plusDays(2).plusHours(1),
+                LocalDateTime.now().plusDays(2).plusHours(3).plusMinutes(10)
+        ));
         add(new Segment(
-                LocalDateTime.of(2024,06,30,17,30),
-                LocalDateTime.of(2024, 06, 30, 18, 45 ))
-        );
+                LocalDateTime.now().plusDays(2).plusHours(4),
+                LocalDateTime.now().plusDays(2).plusHours(6)
+        ));
         add(new Segment(
-                LocalDateTime.of(2024,06,30,19,30),
-                LocalDateTime.of(2024, 06, 30, 21, 10 ))
-        );
+                LocalDateTime.now().plusDays(2).plusHours(7),
+                LocalDateTime.now().plusDays(2).plusHours(10)
+        ));
     }};
     private final Flight flight = new Flight(segments);
 
     @Test
     public void totalFlightMinutesTest () {
-        long expectedResult = 370;
+        long expectedResult = 540;
         long actualResult = flightService.totalFlightMinutes(flight);
         Assertions.assertEquals(expectedResult, actualResult);
     }
@@ -48,26 +49,26 @@ public class FlightServiceImplTest {
     }
     @Test
     public void totalEarthTimeTest() {
-        long expectedResult = 120;
+        long expectedResult = 110;
         long actualResult = flightService.totalEarthTime(flight);
         Assertions.assertEquals(expectedResult, actualResult);
     }
     @Test
     public void totalSkyTimeTest() {
-        long expectedResult = 250;
+        long expectedResult = 430;
         long actualResult = flightService.totalSkyTime(flight);
         Assertions.assertEquals(expectedResult, actualResult);
     }
     @Test
     public void departureTimeTest() {
-        LocalDateTime expectedResult = LocalDateTime.of(2024,06,30,15,00);
-        LocalDateTime actualResult = flightService.departureTime(flight);
+        LocalDateTime expectedResult = LocalDateTime.now().plusDays(2).plusHours(1).truncatedTo(ChronoUnit.MINUTES);
+        LocalDateTime actualResult = flightService.departureTime(flight).truncatedTo(ChronoUnit.MINUTES);
         Assertions.assertEquals(expectedResult, actualResult);
     }
     @Test
     public void arrivalTimeTest() {
-        LocalDateTime expectedResult = LocalDateTime.of(2024, 06, 30, 21, 10 );
-        LocalDateTime actualResult = flightService.arrivalTime(flight);
+        LocalDateTime expectedResult = LocalDateTime.now().plusDays(2).plusHours(10).truncatedTo(ChronoUnit.MINUTES);
+        LocalDateTime actualResult = flightService.arrivalTime(flight).truncatedTo(ChronoUnit.MINUTES);
         Assertions.assertEquals(expectedResult, actualResult);
     }
 }
